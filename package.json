@@ -1,0 +1,25 @@
+{
+  "name": "coinbox",
+  "version": "1.0.0",
+  "description": "Personal financial manager and goal tracking",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andrewfhart/coinbox"
+  },
+  "keywords": [
+    "personal",
+    "finance",
+    "goal",
+    "monitor"
+  ],
+  "author": "Andrew Hart <hello@andrewfhart.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andrewfhart/coinbox/issues"
+  },
+  "homepage": "https://github.com/andrewfhart/coinbox"
+}
