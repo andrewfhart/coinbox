@@ -38,3 +38,37 @@ What is it made of?
 * Selenium Web Driver
 * BackboneJS
 * ReactJS
+
+How do I build it?
+------------------
+
+First, obtain the software and dependencies:
+
+```
+git clone https://github.com/andrewfhart/coinbox
+cd coinbox
+npm install
+```
+
+Next, edit the configuration files with the information appropriate for your environment:
+
+```
+cp src/config/database.example.json src/config/database.json
+cp src/config/security.example.json src/config/security.json
+<edit database.json and security.json as needed>
+```
+
+Then build the server and client code using [gulp](http://gulpjs.com):
+
+```
+# if you don't have gulp yet it can be easily installed using `npm`:
+# (sudo) npm install -g gulp
+gulp
+```
+
+Finally, start up the main NodeJS server and navigate to [http://localhost:3000/](http://localhost:3000/):
+
+```
+cd release
+node app.js
+```
