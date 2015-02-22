@@ -1,0 +1,9 @@
+{
+  "session": {
+    "secret": "SECRETGOESHERE"
+  },
+
+  "csrf": {
+    "secret": "SECRETGOESHERE"
+  }
+}
