@@ -1,2 +1,9 @@
+# Ignore third-party software
 node_modules
+
+# Ignore editor detritus
 *~
+
+# Don't commit sensitive information
+src/config/database.json
+src/config/security.json
