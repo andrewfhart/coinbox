@@ -7,3 +7,6 @@ node_modules
 # Don't commit sensitive information
 src/config/database.json
 src/config/security.json
+
+# Don't commit release artifacts
+release
