@@ -3,6 +3,8 @@ node_modules
 
 # Ignore editor detritus
 *~
+*.sublime-project
+*.sublime-workspace
 
 # Don't commit sensitive information
 src/server/config/database.json
