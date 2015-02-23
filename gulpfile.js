@@ -8,7 +8,7 @@ var concat      = require('gulp-concat');
 var plumber     = require('gulp-plumber');
 
 gulp.task('default', ['build-client', 'build-server']);
-gulp.task('build-client', ['compile-jsx', 'copy-index']);
+gulp.task('build-client', ['compile-jsx', 'copy-index', 'copy-css']);
 gulp.task('build-server', ['build-api']);
 
 gulp.task('compile-jsx', function(cb){
@@ -36,29 +36,18 @@ gulp.task('compile-jsx', function(cb){
     .pipe(gulp.dest('./release/public/'));
 });
 
-/*
-  return gulp.src([
-    './src/client/public/components/**//*.jsx',
-    './src/client/public/coinbox.jsx',
-    './src/client/public/routes.jsx'
-  ])
-  .pipe(debug())
-  .pipe(plumber())
-  .pipe(react({ addPragma: false }))
-  .pipe(browserify({
-    insertGlobals: true,
-    debug: false
-  }))
-  .pipe(concat('coinbox.js'))
-  .pipe(gulp.dest('./release/public/'));
-});
-*/
-
 gulp.task('copy-index', function (cb) {
   return gulp.src([
     './src/client/public/index.html'
   ])
   .pipe(gulp.dest('./release/public/'));
+});
+
+gulp.task('copy-css', function (cb) {
+  return gulp.src([
+    './src/client/public/css/**/*.css'
+  ])
+  .pipe(gulp.dest('./release/public/css/'));
 });
 
 gulp.task('build-api', function (cb) {
