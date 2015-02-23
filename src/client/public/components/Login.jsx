@@ -5,18 +5,23 @@ var Router  = require('react-router');
 var { Route, RouteHandler, Link } = Router;
 
 var Authentication = require('./common/Authentication.jsx');
+var userStore      = require('../flux/stores/user');
 
 
 var Login = React.createClass({
-  mixins: [ Router.Navigation ],
+  mixins: [
+    Router.Navigation,
+    userStore.mixin()
+  ],
 
   statics: {
     attemptedTransition: null
   },
 
-  getInitialState: function () {
+  getStateFromStores: function(){
+    console.log("App.getStateFromStores");
     return {
-      error: false
+      user: userStore.state
     };
   },
 
@@ -33,13 +38,13 @@ var Login = React.createClass({
         Login.attemptedTransition = null;
         transition.retry();
       } else {
-        this.replaceWith('/about');
+        this.replaceWith('/home');
       }
     }.bind(this));
   },
 
   render: function () {
-    var errors = this.state.error ? 'Bad Login Information!' : '';
+    var errors = this.state.user.get('login_error') ? <p>Bad Login Information: {this.state.user.get('login_error')}!</p> : '';
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
