@@ -14,7 +14,7 @@ var config        = require(__dirname + '/config/security.json');
 var app = express();
 
 // Specify basic route middleware
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 app.use(session({
   secret: config.session.secret,
   resave: false,
