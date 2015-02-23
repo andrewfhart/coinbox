@@ -1,36 +1,28 @@
 'use strict';
 
-var ReactFlux = require('react-flux');
+var ReactFlux     = require('react-flux');
 var userConstants = require('../constants/user');
+var request       = require('request');
+var api           = require('../../api');
 
 module.exports = ReactFlux.createActions({
+
+  create: [userConstants.CREATE, function (username, password) {
+    console.log("UserActions.create", username, password);
+    return api.post('/users/create', {username: username, password: password});
+  }],
 
   /**
   * Action may return a value(SUCCESS PAYLOAD), an error, or a promise
   */
-  login: [userConstants.LOGIN, function(username, password){
+  login: [userConstants.LOGIN, function (username, password){
     console.log("UserActions.login", username, password);
-    var promise = new Promise(function(resolve, reject){
-      setTimeout(function(){
-        if( username.length ){
-          resolve({
-            id: 1,
-            username: username
-          });
-        }
-        else{
-          reject(new Error('Invalid login'));
-        }
-      }, 500);
-    });
-    return promise;
+    return api.post('/users/authenticate', {username: username, password: password});
   }],
-
 
   /**
   * An action without a callback will always be successful
   */
   logout: [userConstants.LOGOUT]
-
 
 });
