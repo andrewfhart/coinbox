@@ -11,6 +11,7 @@ var App           = require('./components/App.jsx');
 var Login         = require('./components/Login.jsx');
 var Logout        = require('./components/Logout.jsx');
 var Home          = require('./components/home/Home.jsx');
+var Splash        = require('./components/home/Splash.jsx');
 
 /* Routes */
 var routes = (
@@ -18,6 +19,7 @@ var routes = (
     <Route name="login"  handler={Login}/>
     <Route name="logout" handler={Logout}/>
     <Route name="home"   handler={Home}/>
+    <DefaultRoute handler={Splash}/>
   </Route>
 );
 
