@@ -19,11 +19,15 @@ var Authentication = {
     }
   },
 
-  login: function (username, password, cb) {
+  create: function (username, password) {
+    userActions.create(username, password);
+  },
+
+  login: function (username, password) {
     userActions.login(username, password);
   },
 
-  logout: function (cb) {
+  logout: function () {
     userActions.logout();
   },
 
