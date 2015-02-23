@@ -72,7 +72,8 @@ app.route('/*').get(function(req, res) {
 
 // Ensure the database model is sync'd with the db, then start the app
 models.sequelize.sync().then(function () {
-  var server = app.listen(3000, function() {
+  var port   = process.env['PORT'] || 3000;
+  var server = app.listen(port, function() {
     debug('Express server listening on port ' + server.address().port);
   });
 });
