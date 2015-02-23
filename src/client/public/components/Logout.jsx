@@ -11,7 +11,6 @@ var Logout = React.createClass({
   mixins: [ Router.Navigation ],
 
   render: function () {
-    var errors = this.state.error ? 'Bad Login Information!' : '';
     return (
       <div>
         You have been logged out.
