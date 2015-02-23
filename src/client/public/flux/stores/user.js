@@ -1,6 +1,7 @@
 'use strict';
 
 var ReactFlux     = require('react-flux');
+var Router        = require('../../router');
 var userConstants = require('../constants/user');
 
 var Store = ReactFlux.createStore({
@@ -24,6 +25,32 @@ var Store = ReactFlux.createStore({
 
 }, [
 
+  [userConstants.CREATE, function onCreate(payload){
+    console.log("UserStore.onCreate", JSON.stringify(payload));
+    this.setState({
+      isCreating: true
+    });
+
+  }],
+
+  [userConstants.CREATE_SUCCESS, function handleCreateSuccess(payload){
+    console.log("UserStore.handleCreate", JSON.stringify(payload));
+    this.setState({
+      isCreating: false,
+      create_error: null,
+      data: payload,
+      isAuth: true
+    });
+  }],
+
+  [userConstants.CREATE_FAIL, function handleCreateFailure(error){
+    console.log("UserStore.handleCreateFailure", error.message);
+    this.setState({
+      isCreating: false,
+      create_error: error.message
+    });
+  }],
+
   /**
   * Dispatcher calls this directly when it receives a USER_LOGIN message,
   * just before it tries to execute the corresponding action
@@ -42,10 +69,11 @@ var Store = ReactFlux.createStore({
     console.log("UserStore.handleLogin", JSON.stringify(payload));
     this.setState({
       isLoggingIn: false,
-      error: null,
+      login_error: null,
       data: payload,
       isAuth: true
     });
+    Router.transitionTo('/home');
   }],
 
   /**
@@ -55,7 +83,7 @@ var Store = ReactFlux.createStore({
     console.log("UserStore.handleLoginFailure", error.message);
     this.setState({
       isLoggingIn: false,
-      error: error.message
+      login_error: error.message
     });
   }]
 
