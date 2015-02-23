@@ -1,3 +1,5 @@
+'use strict';
+
 var ReactFlux = require('react-flux');
 var userConstants = require('../constants/user');
 
