@@ -1,12 +1,11 @@
 'use strict';
 
 var React  = require('react');
-var Router = require('react-router');
-var routes = require('./routes.jsx');
+var Router = require('./router');
 var Route  = Router.Route;
 
 document.addEventListener("DOMContentLoaded", function(event) {
-  Router.run(routes, Router.HistoryLocation, function (Handler, state) {
+  Router.run(function (Handler, state) {
     React.render(<Handler />, document.getElementById('__app'));
   });
 });
