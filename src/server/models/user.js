@@ -5,7 +5,8 @@ var bcrypt = require('bcrypt');
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User", {
     username: DataTypes.STRING,
-    password: DataTypes.STRING
+    password: DataTypes.STRING,
+    token: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
@@ -29,6 +30,18 @@ module.exports = function(sequelize, DataTypes) {
       checkPassword: function(password, hash, callback) {
         bcrypt.compare(password, hash, function (err, matched) {
           callback(err, matched);
+        });
+      }
+    },
+    instanceMethods: {
+      regenerateToken: function (callback) {
+        var that = this;
+        User.hash(this.getDataValue('username') + this.getDataValue('password') + new Date(), function (err, token) {
+          console.log('token: ' + token);
+          if (err) return callback(err);
+          that.updateAttributes({token: token}).then(function () {
+            callback(null, token);
+          });
         });
       }
     }
