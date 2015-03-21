@@ -51,8 +51,11 @@ exports.authenticate = function(req, res) {
             res.send({success: false, error: 'password incorrect'});
           } else {
             user.getUserInfo().then(function(userInfo){
-              req.session.userId = user.id;
-              res.send({success: true, user: buildReplyUser(user, userInfo)});
+              user.regenerateToken(function (token) {
+                req.session.userId = user.id;
+                req.session.userToken= user.token;
+                res.send({success: true, user: buildReplyUser(user, userInfo)});
+              });
             });
           }
         });
