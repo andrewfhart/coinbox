@@ -99,6 +99,7 @@ Store.addActionHandler(userConstants.LOGOUT, {
       token: null,
       data: null
     });
+    Router.transitionTo('/');
   }
 });
 

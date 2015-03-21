@@ -23,6 +23,9 @@ module.exports = ReactFlux.createActions({
   /**
   * An action without a callback will always be successful
   */
-  logout: [userConstants.LOGOUT]
+  logout: [userConstants.LOGOUT, function () {
+    console.log("UserActions.logout");
+    return api.post('/users/logout');
+  }]
 
 });
