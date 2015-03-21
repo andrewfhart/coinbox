@@ -34,10 +34,10 @@ app.use ('/', function (req, res, next) {
   debug(req.path);
   if (req.method === 'POST' || req.method === 'PUT') {
     if(req.get('X-XSRF-TOKEN') == req.session.XSRFToken){
-      debug('Token match.')
+      debug('  XSRF Token match.')
       next();
     } else {
-      debug('Token mismatch.')
+      debug('  XSRF Token mismatch.')
       res.send({success: false, error: "XSRF Token mismatch."})
     }
   } else if (req.method === 'GET' && (!req.cookies['XSRF-TOKEN']
@@ -58,6 +58,7 @@ app.use ('/api', function (req, res, next) {
     models.User.find(req.session.userId).then(function(user) {
       req.user = user;
       user.getInfo().then(function(info){
+        debug('  Found user');
         req.userinfo = info;
         next();
       });
