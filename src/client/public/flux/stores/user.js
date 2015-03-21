@@ -71,7 +71,8 @@ var Store = ReactFlux.createStore({
       isLoggingIn: false,
       login_error: null,
       data: payload,
-      isAuth: true
+      isAuth: true,
+      token: payload.token
     });
     Router.transitionTo('/home');
   }],
@@ -83,7 +84,8 @@ var Store = ReactFlux.createStore({
     console.log("UserStore.handleLoginFailure", error.message);
     this.setState({
       isLoggingIn: false,
-      login_error: error.message
+      login_error: error.message,
+      token: null
     });
   }]
 
@@ -94,6 +96,7 @@ Store.addActionHandler(userConstants.LOGOUT, {
     console.log("UserStore.handleLogout");
     this.parent.setState({
       isAuth: false,
+      token: null,
       data: null
     });
   }
