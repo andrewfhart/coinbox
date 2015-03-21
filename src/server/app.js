@@ -8,6 +8,8 @@ var session       = require('express-session');
 var crypto        = require('crypto');
 var bodyParser    = require('body-parser');
 var models        = require('./models');
+var passport      = require('passport');
+var BearerStrategy= require('passport-http-bearer').Strategy;
 var config        = require(__dirname + '/config/security.json');
 
 // Create an Express app
@@ -23,6 +25,9 @@ app.use(session({
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// Initialize authentication library
+app.use(passport.initialize());
 
 // Handle CSRF token management for all routes
 app.use ('/', function (req, res, next) {
@@ -64,6 +69,14 @@ app.use ('/api', function (req, res, next) {
 
 // Define the modules that will handle various API routes
 app.use('/api/users', require('./api/user'));
+
+// Set up OAuth Authentication Strategy
+passport.use(new BearerStrategy(function (token, done) {
+  models.User.find({ where: {token: token}}).then(function(user) {
+    if (!user) return done(null, false);
+    return done(null, user);
+  });
+}));
 
 // Send all other routes to the single page front-end application
 app.route('/*').get(function(req, res) {
