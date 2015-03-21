@@ -6,6 +6,7 @@ var Bootstrap = require('react-bootstrap');
 var {Route, RouteHandler, Link } = Router;
 var {Navbar, Nav, NavItem, DropdownButton, MenuItem} = Bootstrap;
 
+var Navigation = require('../common/Navigation.jsx');
 
 var Home = React.createClass({
 
@@ -26,20 +27,8 @@ var Home = React.createClass({
   render: function () {
     return (
       <div>
-        <Navbar>
-          <Nav>
-            <NavItem eventKey={1} href="/home" onClick={this.navigateHome}>Home</NavItem>
-            <NavItem eventKey={2} href="/accounts" onClick={this.navigateAccounts}>Accounts</NavItem>
-            <DropdownButton eventKey={3} title="Dropdown">
-              <MenuItem eventKey="1">Action</MenuItem>
-              <MenuItem eventKey="2">Another action</MenuItem>
-              <MenuItem eventKey="3">Something else here</MenuItem>
-              <MenuItem divider />
-              <MenuItem eventKey="4">Separated link</MenuItem>
-            </DropdownButton>
-          </Nav>
-        </Navbar>
-        <RouteHandler/>
+        <Navigation/>
+        This is the home page
       </div>
     );
   }
