@@ -1,5 +1,5 @@
 var models  = require('../../models');
-var debug = require('debug')('ballistic');
+var debug = require('debug')('coinbox');
 var validator = require('validator');
 
 function buildReplyUser(user, userInfo) {
@@ -79,9 +79,13 @@ exports.session = function(req, res) {
 
 exports.logout = function(req, res) {
   if (req.user) {
+    debug('  User found, logging out.');
     req.session.userId = null;
     res.send({success: true});
   } else {
-    res.send({success: false, error: 'session expired'});
+    // Logging out is always successful... if there was
+    // no user, there's just nothing to do.
+    debug('  No user found, logging out anyway.')
+    res.send({success: true});
   }
 }
